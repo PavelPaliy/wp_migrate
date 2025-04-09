@@ -18,7 +18,7 @@ foreach($dbh->query($sql, PDO::FETCH_ASSOC) as $row) {
     WHERE r.term_taxonomy_id = {$row['term_id']} and kl_term_taxonomy.taxonomy ='post_tag';";
     $stWhichGetNumberOfPosts = $dbh->query($sqlWhichGetNumberOfPosts);
     $rowWhichHasNumberOfPosts = $stWhichGetNumberOfPosts->fetch();
-    if(!$rowWhichHasNumberOfPosts || $rowWhichHasNumberOfPosts['number_of_posts'] < 5) {
+    if(!$rowWhichHasNumberOfPosts || $rowWhichHasNumberOfPosts['number_of_posts'] <= 5) {
         continue;
     }
 
