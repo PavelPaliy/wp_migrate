@@ -48,11 +48,14 @@ if(is_string($row['post_content']) && !empty($row['post_content'])){
 }
 
 
-            if (in_array($row['post_status'], ['publish', 'future'])) {
-                $sub['status'] = 'PUBLISHED';
-            } elseif (in_array($row['post_status'], ['draft', 'pending', 'auto-draft'])) {
-                $sub['status'] = 'DRAFT';
-            }
+        if ($row['post_status'] == 'publish') {
+            $sub['status'] = 'PUBLISHED';
+
+        }else if($row['post_status'] == 'future'){
+            $sub['status'] = 'SCHEDULE';
+        } elseif (in_array($row['post_status'], ['draft', 'pending', 'auto-draft'])) {
+            $sub['status'] = 'DRAFT';
+        }
 
             $sql2 = "select meta_key, meta_value from kl_postmeta where post_id = {$row['ID']}";
             foreach ($dbh->query($sql2, PDO::FETCH_ASSOC) as $row2) {
